@@ -360,8 +360,21 @@ ccl_device
 
         /* Are we on a caustic receiver? */
         if (!is_transmission && (sd->object_flag & SD_OBJECT_CAUSTICS_RECEIVER)) {
-          mnee_vertex_count = kernel_path_mnee_sample(
-              kg, state, sd, emission_sd, rng_state, &ls, &bsdf_eval);
+          /* Which strategy to use. */
+          const int caustics_sampling_strategy = kernel_data.integrator.caustics_sampling_strategy;
+
+          if (caustics_sampling_strategy == CAUSTICS_SAMPLING_STRATEGY_SMS_UNBIASED) {
+            /* Use unbiased SMS. */
+          }
+          if (caustics_sampling_strategy == CAUSTICS_SAMPLING_STRATEGY_SMS_BIASED) {
+            /* Use biased SMS. */
+          }
+
+          if (caustics_sampling_strategy == CAUSTICS_SAMPLING_STRATEGY_MNEE) {
+            /* Fallback to original MNEE if SMS is disabled, failed, or no caster found. */
+            mnee_vertex_count = kernel_path_mnee_sample(
+                kg, state, sd, emission_sd, rng_state, &ls, &bsdf_eval);
+          }
         }
       }
     }

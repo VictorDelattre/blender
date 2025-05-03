@@ -341,6 +341,15 @@ void BlenderSync::sync_integrator(BL::ViewLayer &b_view_layer,
 
   integrator->set_caustics_reflective(get_boolean(cscene, "caustics_reflective"));
   integrator->set_caustics_refractive(get_boolean(cscene, "caustics_refractive"));
+  const string caustics_strategy = get_enum_identifier(cscene, "caustics_sampling_strategy");
+  if (caustics_strategy == "NEE")
+    integrator->set_caustics_sampling_strategy(CAUSTICS_SAMPLING_STRATEGY_NEE);
+  else if (caustics_strategy == "MNEE")
+    integrator->set_caustics_sampling_strategy(CAUSTICS_SAMPLING_STRATEGY_MNEE);
+  else if (caustics_strategy == "SMS_UNBIASED")
+    integrator->set_caustics_sampling_strategy(CAUSTICS_SAMPLING_STRATEGY_SMS_UNBIASED);
+  else if (caustics_strategy == "SMS_BIASED")
+    integrator->set_caustics_sampling_strategy(CAUSTICS_SAMPLING_STRATEGY_SMS_BIASED);
   integrator->set_filter_glossy(get_float(cscene, "blur_glossy"));
 
   int seed = get_int(cscene, "seed");

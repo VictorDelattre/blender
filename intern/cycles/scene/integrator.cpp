@@ -93,6 +93,7 @@ NODE_DEFINE(Integrator)
 
   SOCKET_BOOLEAN(caustics_reflective, "Reflective Caustics", true);
   SOCKET_BOOLEAN(caustics_refractive, "Refractive Caustics", true);
+  SOCKET_INT(caustics_sampling_strategy, "Caustics Sampling Strategy", 1);
   SOCKET_FLOAT(filter_glossy, "Filter Glossy", 0.0f);
 
   SOCKET_BOOLEAN(use_direct_light, "Use Direct Light", true);
@@ -227,6 +228,7 @@ void Integrator::device_update(Device *device, DeviceScene *dscene, Scene *scene
 
   kintegrator->caustics_reflective = caustics_reflective;
   kintegrator->caustics_refractive = caustics_refractive;
+  kintegrator->caustics_sampling_strategy = caustics_sampling_strategy;
   kintegrator->filter_glossy = (filter_glossy == 0.0f) ? FLT_MAX : 1.0f / filter_glossy;
 
   kintegrator->filter_closures = 0;

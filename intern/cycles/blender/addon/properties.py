@@ -644,6 +644,18 @@ class CyclesRenderSettings(bpy.types.PropertyGroup):
         default=True,
     )
 
+    caustics_sampling_strategy: EnumProperty(
+        name="Sampling Strategy",
+        description="Method to use for caustic sampling",
+        items=[
+            ('NEE', "NEE", "Standard Next Event Estimation"),
+            ('MNEE', "MNEE", "Manifold Next Event Estimation"),
+            ('SMS_UNBIASED', "Unbiased SMS", "Specular Manifold Sampling using unbiased algorithm"),
+            ('SMS_BIASED', "Biased SMS", "Specular Manifold Sampling using biased algorithm"),
+        ],
+        default='MNEE',
+    )
+
     blur_glossy: FloatProperty(
         name="Filter Glossy",
         description="Adaptively blur glossy shaders after blurry bounces, "
