@@ -648,12 +648,21 @@ class CyclesRenderSettings(bpy.types.PropertyGroup):
         name="Sampling Strategy",
         description="Method to use for caustic sampling",
         items=[
-            ('NEE', "NEE", "Standard Next Event Estimation"),
             ('MNEE', "MNEE", "Manifold Next Event Estimation"),
             ('SMS_UNBIASED', "Unbiased SMS", "Specular Manifold Sampling using unbiased algorithm"),
             ('SMS_BIASED', "Biased SMS", "Specular Manifold Sampling using biased algorithm"),
         ],
         default='MNEE',
+    )
+
+    caustics_constraint_derivatives: EnumProperty(
+        name="Constraint Derivatives",
+        description="Method to use for caustic derivatives",
+        items=[
+            ('HALF_VECTOR', "Half Vector", "Original half vector constraints"),
+            ('ANGLE_DIFF', "Angle Difference", "New angle difference constraints (experimental)"),
+        ],
+        default='HALF_VECTOR',
     )
 
     blur_glossy: FloatProperty(

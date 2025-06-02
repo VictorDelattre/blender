@@ -456,10 +456,15 @@ enum PathRayMNEE {
 
 /* Caustics sampling strategy to use in kernel. */
 enum CausticsSamplingStrategy {
-  CAUSTICS_SAMPLING_STRATEGY_NEE = 0,         /* Standard Next Event Estimation */
-  CAUSTICS_SAMPLING_STRATEGY_MNEE = 1,        /* Manifold Next Event Estimation */
-  CAUSTICS_SAMPLING_STRATEGY_SMS_BIASED = 2,  /* Biased Specular Manifold Sampling */
-  CAUSTICS_SAMPLING_STRATEGY_SMS_UNBIASED = 3 /* Unbiased Specular Manifold Sampling */
+  CAUSTICS_SAMPLING_STRATEGY_MNEE = 0,        /* Manifold Next Event Estimation */
+  CAUSTICS_SAMPLING_STRATEGY_SMS_BIASED = 1,  /* Biased Specular Manifold Sampling */
+  CAUSTICS_SAMPLING_STRATEGY_SMS_UNBIASED = 2 /* Unbiased Specular Manifold Sampling */
+};
+
+/* Caustics constraint derivatives to use in kernel. */
+enum CausticsConstraintDerivatives {
+  CAUSTICS_CONSTRAINT_DERIVATIVES_HV = 0, /* Half Vector Constraint */
+  CAUSTICS_CONSTRAINT_DERIVATIVES_AD = 1, /* Angle Difference Constraint */
 };
 
 /* Configure ray visibility bits for rays and objects respectively,
