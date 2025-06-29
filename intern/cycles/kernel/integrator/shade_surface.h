@@ -366,15 +366,15 @@ ccl_device
           const int caustics_sampling_strategy = kernel_data.integrator.caustics_sampling_strategy;
           Spectrum sms_contribution = zero_spectrum();
 
-          if (caustics_sampling_strategy == CAUSTICS_SAMPLING_STRATEGY_SMS_BIASED) {
-            /* Use biased SMS */
-            sms_contribution = integrate_sms_biased(
-                kg, state, sd, emission_sd, rng_state, &ls, &bsdf_eval);
-          }
-
           if (caustics_sampling_strategy == CAUSTICS_SAMPLING_STRATEGY_SMS_UNBIASED) {
             /* Use unbiased SMS */
             sms_contribution = integrate_sms_unbiased(
+                kg, state, sd, emission_sd, rng_state, &ls, &bsdf_eval);
+          }
+
+          if (caustics_sampling_strategy == CAUSTICS_SAMPLING_STRATEGY_SMS_BIASED) {
+            /* Use biased SMS */
+            sms_contribution = integrate_sms_biased(
                 kg, state, sd, emission_sd, rng_state, &ls, &bsdf_eval);
           }
 

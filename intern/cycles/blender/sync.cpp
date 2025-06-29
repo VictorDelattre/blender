@@ -341,19 +341,19 @@ void BlenderSync::sync_integrator(BL::ViewLayer &b_view_layer,
 
   integrator->set_caustics_reflective(get_boolean(cscene, "caustics_reflective"));
   integrator->set_caustics_refractive(get_boolean(cscene, "caustics_refractive"));
-  const string caustics_strategy = get_enum_identifier(cscene, "caustics_sampling_strategy");
-  if (caustics_strategy == "MNEE")
-    integrator->set_caustics_sampling_strategy(CAUSTICS_SAMPLING_STRATEGY_MNEE);
-  else if (caustics_strategy == "SMS_UNBIASED")
-    integrator->set_caustics_sampling_strategy(CAUSTICS_SAMPLING_STRATEGY_SMS_UNBIASED);
-  else if (caustics_strategy == "SMS_BIASED")
-    integrator->set_caustics_sampling_strategy(CAUSTICS_SAMPLING_STRATEGY_SMS_BIASED);
-  const string caustics_derivatives = get_enum_identifier(cscene, "caustics_constraint_derivatives");
-  if (caustics_strategy == "HALF_VECTOR")
-    integrator->set_caustics_constraint_derivatives(CAUSTICS_CONSTRAINT_DERIVATIVES_HV);
-  else if (caustics_strategy == "ANGLE_DIFF")
-    integrator->set_caustics_constraint_derivatives(CAUSTICS_CONSTRAINT_DERIVATIVES_AD);
   integrator->set_filter_glossy(get_float(cscene, "blur_glossy"));
+  const CausticsSamplingStrategy caustics_sampling_strategy = (CausticsSamplingStrategy)get_enum(
+      cscene,
+      "caustics_sampling_strategy",
+      CAUSTICS_SAMPLING_NUM_STRATEGY,
+      CAUSTICS_SAMPLING_STRATEGY_MNEE);
+  integrator->set_caustics_sampling_strategy(caustics_sampling_strategy);
+  const CausticsConstraintDerivatives caustics_constraint_derivatives =
+      (CausticsConstraintDerivatives)get_enum(cscene,
+                                              "caustics_constraint_derivatives",
+                                              CAUSTICS_CONSTRAINT_NUM_DERIVATIVES,
+                                              CAUSTICS_CONSTRAINT_DERIVATIVES_HV);
+  integrator->set_caustics_constraint_derivatives(caustics_constraint_derivatives);
 
   int seed = get_int(cscene, "seed");
   if (get_boolean(cscene, "use_animated_seed")) {
