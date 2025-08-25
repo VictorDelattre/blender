@@ -4,6 +4,12 @@ linking to external resources instead of including content in-line.
 See 'release/text/readme.html' for the end user read-me.
 -->
 
+Master's Thesis
+=======
+
+This is a fork of the official Blender repository for my Master's Thesis about integrating SMS into Cycles' MNEE pipeline.
+For more information, please read [this document](thesis/mnee-to-sms.md).
+
 Blender
 =======
 
